@@ -20,10 +20,11 @@ made.
   Area-specific documentation stays with the relevant area.
 - All agents use `AGENTS.md` as their common entry point and work in isolated
   worktrees on task branches.
-- Execution tasks require a reviewed plan before implementation, followed by a
-  separate review of completed work before merging; see the workflow for details.
+- Execution tasks require plan approval before local implementation and completion
+  summary approval before pushing and opening or updating a PR. The human reviews
+  and merges on GitHub; see the workflow for details.
 - `develop` is the integration branch. `main` represents approved milestones
-  delivered as releases. Integration requires human review.
+  delivered as releases. The human performs integration through GitHub PRs.
 - Empty reserved directories are tracked with `.gitkeep`.
 
 ## Open engineering decisions

@@ -71,4 +71,5 @@ verification to the change; documentation tasks may use structural/link checks.
 - Requested action: `Approve this plan to begin implementation.`
 - Decisions or blockers: `<list, or None>`
 - Implementation status: `Not started; awaiting explicit human approval.`
-- Merge authorization: `Not requested; requires separate review of completed work.`
+- Publication authorization: `Not requested; requires approval of the completion summary.`
+- Merge responsibility: `The human reviews and merges the PR on GitHub.`

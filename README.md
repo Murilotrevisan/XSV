@@ -70,8 +70,9 @@ artifact conventions.
 
 Task branches start from and target `develop`. `main` is reserved for explicitly
 approved project milestones and releases. Execution tasks start with a plan for
-human approval. Once approved, local implementation commits are allowed; merges
-require a separate review summary and explicit human approval. See the
+human approval. Once approved, local implementation commits are allowed. Approval
+of the completion summary authorizes pushing to `origin` and opening or updating
+the PR. The human performs the final review and merge on GitHub. See the
 [workflow](docs/WORKFLOW.md) for the complete policy.
 
 Documentation is written in English. The existing [license](LICENSE) is retained.

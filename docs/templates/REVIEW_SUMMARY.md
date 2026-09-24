@@ -69,6 +69,7 @@ checks as validation of the vessel.
 
 ## Review request
 
-- Requested action: `<review only | approve merge into named target | milestone review>`
+- Requested action: `<approve push to origin and PR creation/update against named target | milestone publication review>`
 - Open issues or limitations: `<list, or None>`
-- Merge status: `Not performed; awaiting explicit human approval.`
+- Publication status: `<local only; awaiting summary approval | published after summary approval; PR link>`
+- Merge status: `Not performed by the agent; the human reviews and merges on GitHub.`

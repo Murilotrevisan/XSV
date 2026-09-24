@@ -20,12 +20,14 @@ Before editing:
 - For each new execution task, investigate and present the
   [task plan](docs/templates/TASK_PLAN.md), then wait for explicit human approval
   before implementation. Follow the planning policy in `docs/WORKFLOW.md`;
-  plan approval does not authorize a merge.
+  plan approval authorizes local implementation, not publication or merging.
 - Use an isolated worktree and a task branch based on `develop`. Follow the
   naming and integration rules in the workflow.
-- Local task-branch commits are allowed. Every merge requires explicit human
-  approval of the actual changes. Preparing work does not authorize publishing
-  branches, opening PRs, tagging releases, or pushing changes.
+- Local task-branch commits are allowed after plan approval. Present the completed
+  review summary and wait for approval before pushing to `origin` and opening or
+  updating the PR. Summary approval authorizes that publication without another
+  permission request. The human performs the final review and merge on GitHub;
+  agents do not merge PRs or enable auto-merge. Releases require separate scope.
 - Work within the requested scope. Do not infer technical requirements or select
   hardware, autonomy features, software layers, or toolchains from folder names.
 - Keep public documentation self-contained. Do not introduce private local paths,

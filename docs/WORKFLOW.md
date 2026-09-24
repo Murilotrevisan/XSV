@@ -42,8 +42,16 @@ committed planning document is not mandatory. Use English section names, as with
 the review summary. Preserve an accessible handoff reference when another agent
 takes over. Approved lasting decisions belong in the owning project documents.
 
-The task has two distinct reviews: **approve the plan to permit implementation**,
-then **approve the completed change to permit a merge**.
+The task progresses through three distinct review stages:
+
+| Stage | Human decision | Agent action |
+| --- | --- | --- |
+| Plan | Approve the proposed approach. | Implement, verify, and commit locally. |
+| Completion summary | Approve publication of the reviewed changes. | Push the task branch to `origin` and open or update its PR. |
+| GitHub PR | Review at the desired depth and perform the merge. | Address requested changes; never merge or enable auto-merge. |
+
+Plan approval does not authorize publication. Summary approval authorizes
+publication, not an agent-performed merge.
 
 ## Branches
 
@@ -87,8 +95,8 @@ task plan to communicate scope, dependencies, and completion criteria.
 ## Commits and synchronization
 
 After plan approval, local implementation commits on task branches are allowed
-without per-commit approval. Use
-meaningful messages and coherent changes; there is no required commit count.
+without per-commit approval. Use meaningful messages and coherent changes;
+there is no required commit count.
 Review the diff before committing and preserve unrelated work.
 
 Every merge requires explicit human approval, including merges used to refresh
@@ -97,8 +105,11 @@ the necessary synchronization. Do not bypass review through rebasing,
 cherry-picking, resetting, or moving protected branch refs. History rewrites also
 require approval.
 
-Permission to commit locally is not permission to push, open a PR, create a tag,
-or publish a release. Perform those actions only when requested or authorized.
+Keep implementation local until the human approves its completion summary.
+That approval authorizes pushing the reviewed task branch to `origin` and opening
+or updating its PR against the named target, without asking again. It does not
+authorize direct pushes to `develop` or `main`, unrelated changes, force pushes,
+tags, or release publication.
 
 ## Review handoff
 
@@ -128,23 +139,34 @@ Mermaid is suitable for software diagrams in Markdown. Engineering drawings need
 readable dimensions; retain their editable source and a viewable export when the
 source cannot be previewed. Identify conceptual diagrams as conceptual.
 
-The summary can be delivered in chat or the PR description using English section
-names. Do not commit a duplicate report solely to repeat the handoff. Durable test
-evidence and design records belong in their documented repository locations.
+Present the summary in the task conversation using English section names before
+publishing. Once approved, use it as the PR description, making it self-contained
+for a reviewer who has not read the conversation. Do not commit a duplicate report
+solely to repeat the handoff. Durable test evidence and design records belong in
+their documented repository locations.
 
 ## Integration and milestone releases
 
 1. After plan approval, finish the scoped change and relevant verification on
    its task branch.
-2. Present the complete review summary to the human reviewer.
-3. Wait for explicit merge approval. Approval applies to the reviewed changes and
-   named target, not future changes or releases.
-4. Integrate into `develop` only as approved. If conflicts or material changes
-   arise, resolve and recheck on the task branch, then submit the revised summary
-   before completing integration.
-5. When a project milestone is explicitly defined, prepare a release summary from
-   `develop`, including scope, evidence, and known limitations. Integration into
-   `main`, the version/tag, and release publication require explicit approval.
+2. Present the complete review summary and wait for explicit approval to publish.
+   Identify the reviewed commits and target branch. If the human requests changes,
+   revise locally, verify, and resubmit the summary.
+3. After summary approval, push the reviewed task branch to `origin` and open a PR
+   targeting `develop`. If an open PR already exists for the task, update it instead
+   of opening a duplicate. Use the approved summary as the description and return
+   the PR link. Approval covers only the reviewed changes and named target.
+4. The human chooses whether to inspect the full diff or rely on the summary, and
+   performs the merge on GitHub. Agents do not merge the PR, enable auto-merge, or
+   integrate the work by directly moving `develop` or `main`.
+5. Follow-up changes, including conflict resolutions, are verified locally and
+   require an updated summary approval before another push. Seek renewed plan
+   approval only for material deviations as defined above. Do not treat approval
+   of an earlier summary as permission to publish later changes.
+6. When a project milestone is explicitly defined, prepare a release summary from
+   `develop`, including scope, evidence, and known limitations. After approval,
+   open the milestone PR against `main` for the human to merge on GitHub. The
+   version/tag and release publication require separate explicit authorization.
 
 Do not invent a release cadence or versioning scheme before the first milestone
 needs one. The initial repository commit predates this workflow; future updates
