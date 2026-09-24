@@ -20,14 +20,19 @@ Before editing:
 - For each new execution task, investigate and present the
   [task plan](docs/templates/TASK_PLAN.md), then wait for explicit human approval
   before implementation. Follow the planning policy in `docs/WORKFLOW.md`;
-  plan approval authorizes local implementation, not publication or merging.
+  plan approval authorizes implementation and publication to the task PR, not
+  merging.
 - Use an isolated worktree and a task branch based on `develop`. Follow the
   naming and integration rules in the workflow.
-- Local task-branch commits are allowed after plan approval. Present the completed
-  review summary and wait for approval before pushing to `origin` and opening or
-  updating the PR. Summary approval authorizes that publication without another
-  permission request. The human performs the final review and merge on GitHub;
+- After plan approval, implement, verify, commit, push the task branch to `origin`,
+  and open or update its PR with the complete review summary. No separate summary
+  approval is required before publication. The human reviews and merges on GitHub;
   agents do not merge PRs or enable auto-merge. Releases require separate scope.
+- Every agent-authored commit must include a `Co-authored-by` trailer identifying
+  the executing agent. Follow the attribution convention in `docs/WORKFLOW.md`.
+- When asked to address PR feedback, read both general and inline comments, apply
+  in-scope corrections, verify them, and update the same PR and its summary.
+  Material departures from the approved plan still require approval first.
 - Work within the requested scope. Do not infer technical requirements or select
   hardware, autonomy features, software layers, or toolchains from folder names.
 - Keep public documentation self-contained. Do not introduce private local paths,

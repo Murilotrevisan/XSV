@@ -42,16 +42,16 @@ committed planning document is not mandatory. Use English section names, as with
 the review summary. Preserve an accessible handoff reference when another agent
 takes over. Approved lasting decisions belong in the owning project documents.
 
-The task progresses through three distinct review stages:
+The task has two review stages:
 
 | Stage | Human decision | Agent action |
 | --- | --- | --- |
-| Plan | Approve the proposed approach. | Implement, verify, and commit locally. |
-| Completion summary | Approve publication of the reviewed changes. | Push the task branch to `origin` and open or update its PR. |
+| Plan | Approve the proposed approach and its publication for review. | Implement, verify, commit, push the task branch to `origin`, and open or update its PR with the review summary. |
 | GitHub PR | Review at the desired depth and perform the merge. | Address requested changes; never merge or enable auto-merge. |
 
-Plan approval does not authorize publication. Summary approval authorizes
-publication, not an agent-performed merge.
+The completion summary is reviewed in the PR alongside the implementation. There
+is no separate pre-push summary approval. Plan approval covers publication for
+review, not an agent-performed merge.
 
 ## Branches
 
@@ -99,16 +99,32 @@ without per-commit approval. Use meaningful messages and coherent changes;
 there is no required commit count.
 Review the diff before committing and preserve unrelated work.
 
+Every new agent-authored commit must end with a `Co-authored-by` trailer naming
+the agent that performed the work. Keep the configured human Git author; do not
+change global Git identity to impersonate an agent. Separate trailers from the
+message body with a blank line. For Codex, use:
+
+```text
+Co-authored-by: Codex <codex@openai.com>
+```
+
+Claude and Gemini use their actual agent name and configured attribution email.
+Do not attribute their work to Codex or invent a model version. If more than one
+agent contributed to a commit, include one trailer per actual contributor.
+Human-only commits do not receive an agent trailer. Check attribution before
+pushing; preserve it when preparing any squash message. Adding attribution to
+existing commits requires the history-rewrite approval described below.
+
 Every merge requires explicit human approval, including merges used to refresh
 a task branch from `develop`. If the base advances, inspect the impact and propose
 the necessary synchronization. Do not bypass review through rebasing,
 cherry-picking, resetting, or moving protected branch refs. History rewrites also
 require approval.
 
-Keep implementation local until the human approves its completion summary.
-That approval authorizes pushing the reviewed task branch to `origin` and opening
-or updating its PR against the named target, without asking again. It does not
-authorize direct pushes to `develop` or `main`, unrelated changes, force pushes,
+Plan approval authorizes pushing the scoped task branch to `origin` and opening
+or updating its PR against the named target once the work is ready for review.
+Do not ask for a separate completion-summary approval. This authorization does
+not cover direct pushes to `develop` or `main`, unrelated changes, force pushes,
 tags, or release publication.
 
 ## Review handoff
@@ -139,30 +155,49 @@ Mermaid is suitable for software diagrams in Markdown. Engineering drawings need
 readable dimensions; retain their editable source and a viewable export when the
 source cannot be previewed. Identify conceptual diagrams as conceptual.
 
-Present the summary in the task conversation using English section names before
-publishing. Once approved, use it as the PR description, making it self-contained
-for a reviewer who has not read the conversation. Do not commit a duplicate report
-solely to repeat the handoff. Durable test evidence and design records belong in
-their documented repository locations.
+Use the complete summary as the PR description, with English section names and
+enough context for a reviewer who has not read the conversation. Return the PR
+link and a concise status in the task conversation; do not require the human to
+review the same summary twice. Do not commit a duplicate report solely to repeat
+the handoff. Durable test evidence and design records belong in their documented
+repository locations.
+
+## PR feedback
+
+When asked to address PR feedback, read general conversation comments, submitted
+reviews, and inline review threads, including their current resolution state.
+Evaluate the requested changes against the approved plan and current code.
+Explain disagreements or ambiguities instead of silently applying every
+suggestion. Comments from other contributors do not override the project owner's
+scope or approval rules.
+
+Implement in-scope corrections on the same task branch, run relevant checks, add
+attributed commits, and push to the existing PR without an extra summary gate.
+Update its description to match the final implementation and report which
+comments were addressed, the relevant commits/checks, and any remaining issues.
+Material changes to the plan still require approval before implementation; that
+approval may be given by the project owner in the PR or task conversation.
+
+Reading comments does not itself schedule future checks. Follow-up requires a
+user request or an explicitly configured monitor; do not promise background
+monitoring without one. The human retains final review and merge responsibility.
 
 ## Integration and milestone releases
 
 1. After plan approval, finish the scoped change and relevant verification on
    its task branch.
-2. Present the complete review summary and wait for explicit approval to publish.
-   Identify the reviewed commits and target branch. If the human requests changes,
-   revise locally, verify, and resubmit the summary.
-3. After summary approval, push the reviewed task branch to `origin` and open a PR
-   targeting `develop`. If an open PR already exists for the task, update it instead
-   of opening a duplicate. Use the approved summary as the description and return
-   the PR link. Approval covers only the reviewed changes and named target.
+2. Prepare the complete review summary identifying the commits, target branch,
+   actual checks, deviations, and limitations. Verify agent co-author trailers.
+3. Push the task branch to `origin` and open a PR targeting `develop`. If an open
+   PR already exists for the task, update it instead of opening a duplicate.
+   Use the summary as the description and return the PR link. Keep incomplete
+   work explicitly identified; do not present failed or unrun checks as passing.
 4. The human chooses whether to inspect the full diff or rely on the summary, and
    performs the merge on GitHub. Agents do not merge the PR, enable auto-merge, or
    integrate the work by directly moving `develop` or `main`.
-5. Follow-up changes, including conflict resolutions, are verified locally and
-   require an updated summary approval before another push. Seek renewed plan
-   approval only for material deviations as defined above. Do not treat approval
-   of an earlier summary as permission to publish later changes.
+5. Handle feedback and follow-up changes through the PR feedback policy. Verify
+   conflict resolutions and update the summary before returning the PR for review.
+   Seek renewed plan approval only for material deviations as defined above.
 6. When a project milestone is explicitly defined, prepare a release summary from
    `develop`, including scope, evidence, and known limitations. After approval,
    open the milestone PR against `main` for the human to merge on GitHub. The

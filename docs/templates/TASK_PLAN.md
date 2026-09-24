@@ -68,8 +68,8 @@ verification to the change; documentation tasks may use structural/link checks.
 
 ## Approval request
 
-- Requested action: `Approve this plan to begin implementation.`
+- Requested action: `Approve this plan to implement, verify, and publish the task PR.`
 - Decisions or blockers: `<list, or None>`
 - Implementation status: `Not started; awaiting explicit human approval.`
-- Publication authorization: `Not requested; requires approval of the completion summary.`
+- Publication authorization: `Included in plan approval for the scoped task branch and PR; no separate summary approval.`
 - Merge responsibility: `The human reviews and merges the PR on GitHub.`

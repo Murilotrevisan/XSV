@@ -64,12 +64,13 @@ changes. Do not invent a layer model. Otherwise:
 Separate automated checks, simulation, and physical verification when applicable.
 State failures, skipped checks, untested behavior, and remaining limitations.
 Account for the planned checks, identifying which ran, which did not, and why.
+Confirm that new agent-authored commits include the correct co-author trailers.
 Documentation changes may use structural and link checks; do not describe those
 checks as validation of the vessel.
 
 ## Review request
 
-- Requested action: `<approve push to origin and PR creation/update against named target | milestone publication review>`
+- Requested action: `Review this PR and merge on GitHub when satisfied.`
 - Open issues or limitations: `<list, or None>`
-- Publication status: `<local only; awaiting summary approval | published after summary approval; PR link>`
+- Publication status: `<published under plan approval; PR link | not published; explain blocker>`
 - Merge status: `Not performed by the agent; the human reviews and merges on GitHub.`
