@@ -1,0 +1,35 @@
+# Local secrets; example configuration can be deliberately versioned.
+.env
+.env.*
+!.env.example
+
+# Worktrees belong outside the checkout; ignore this conventional fallback.
+/.worktrees/
+
+# Local agent state. Shared instructions in root Markdown files are tracked.
+/.codex/
+/.claude/
+/.gemini/
+
+# Build products, caches, and temporary analysis output.
+build/
+out/
+.cache/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+node_modules/
+coverage/
+*.tmp
+*.swp
+
+# User-specific editor and operating-system state.
+/.idea/
+/.vscode/
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Do not blanket-ignore CAD exports, measurements, or test reports.
+# Scope additional generated-output rules to their owning area when needed.
