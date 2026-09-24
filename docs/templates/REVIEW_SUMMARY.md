@@ -3,6 +3,7 @@
 - Source branch: `<agent>/<feature|fix>/<slug>`
 - Target branch: `develop` (or `main` for an approved milestone proposal)
 - Review scope: `<commit range or working-tree diff, including untracked files>`
+- Approved plan: `<conversation/issue reference, or explicit planning waiver>`
 - State: `<ready for review | incomplete | blocked>`
 
 ## Objective
@@ -19,6 +20,8 @@ Link the authoritative documents. Identify unresolved assumptions.
 Explain the choices implemented, why they were chosen, and relevant tradeoffs.
 Distinguish implemented proposals awaiting review from previously approved
 decisions. Mention alternatives only when they help assess the change.
+Compare the result with the approved plan. Identify deviations, their reasons,
+and renewed approval for material changes; write `None` if there were none.
 
 ## Summary of changed files
 
@@ -60,6 +63,7 @@ changes. Do not invent a layer model. Otherwise:
 
 Separate automated checks, simulation, and physical verification when applicable.
 State failures, skipped checks, untested behavior, and remaining limitations.
+Account for the planned checks, identifying which ran, which did not, and why.
 Documentation changes may use structural and link checks; do not describe those
 checks as validation of the vessel.
 

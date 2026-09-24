@@ -1,5 +1,50 @@
 # Development and review workflow
 
+## Plan before implementation
+
+Each new execution task starts with a plan using
+[the task plan template](templates/TASK_PLAN.md). This applies to software,
+hardware, mechanical design, tooling, and documentation changes. Questions,
+discussion, and read-only reviews do not require an implementation plan.
+
+Before approval, the agent may inspect sources and documentation, investigate
+dependencies, run non-destructive baseline checks, prepare an isolated worktree,
+and draft the plan and explanatory diagrams. Do not begin implementation, change
+product files, or run physical trials during this investigation. Present relevant
+findings and uncertainties so the plan can be reviewed on evidence.
+
+The plan states the objective, context, proposed approach, expected file changes,
+affected software layers, applicable diagrams, and planned verification. Keep the
+template's section names and order. For inapplicable sections, use
+`Not applicable — <reason>`. A small task can have a short plan; do not invent
+software layers or diagrams for changes that do not affect runtime or design.
+
+Software diagrams show the intended runtime interaction, state transitions, or
+activity, including relevant failure paths. Hardware and mechanical plans use
+conceptual electrical diagrams and dimensioned sketches where applicable. Mark
+unknown dimensions and interfaces as unresolved instead of inventing values.
+These planning diagrams describe a proposal, not a validated design.
+
+Present the plan and wait for explicit human approval before implementation.
+Silence, the original task request, and permission to commit locally are not plan
+approval. The human may explicitly waive planning for a particular task; do not
+carry that exception into later tasks.
+
+Approval covers the proposed scope, approach, and verification. Routine details
+within that scope do not require repeated approval. If investigation during
+implementation reveals a material change to scope, interfaces, affected layers,
+runtime behavior, or acceptance criteria, pause the affected work and present the
+revised portion of the plan for approval. Continue independent approved work when
+possible. Do not defer disclosure of a material deviation until final review.
+
+Keep the plan and approval reference in the task conversation or issue; a separate
+committed planning document is not mandatory. Use English section names, as with
+the review summary. Preserve an accessible handoff reference when another agent
+takes over. Approved lasting decisions belong in the owning project documents.
+
+The task has two distinct reviews: **approve the plan to permit implementation**,
+then **approve the completed change to permit a merge**.
+
 ## Branches
 
 | Branch | Purpose |
@@ -36,13 +81,13 @@ before changing anything. Never switch branches in another agent's directory or
 remove a worktree that contains unreviewed work.
 
 Git worktrees isolate working files, but share repository refs and configuration.
-Coordinate branch operations and edits to common documents. A task should state
-its objective, affected areas, dependencies, and completion criteria; a task
-description or issue is sufficient, without a mandatory additional planning file.
+Coordinate branch operations and edits to common documents. Use the approved
+task plan to communicate scope, dependencies, and completion criteria.
 
 ## Commits and synchronization
 
-Local commits on task branches are allowed without per-commit approval. Use
+After plan approval, local implementation commits on task branches are allowed
+without per-commit approval. Use
 meaningful messages and coherent changes; there is no required commit count.
 Review the diff before committing and preserve unrelated work.
 
@@ -65,6 +110,9 @@ The summary must identify the source branch, target branch, reviewed commit or
 uncommitted state, and verification status. Provide file links, actual check
 results, limitations, and remaining work. Never present an unrun check as passed.
 For uncommitted work, state that the working-tree diff is the review scope.
+Reference the approved plan (or explicit waiver), compare delivered work against
+it, and identify deviations and their approval where required. Report actual
+verification results against planned checks, including checks not performed.
 
 Diagrams should explain the changed behavior or design:
 
@@ -86,7 +134,8 @@ evidence and design records belong in their documented repository locations.
 
 ## Integration and milestone releases
 
-1. Finish the scoped change and relevant verification on its task branch.
+1. After plan approval, finish the scoped change and relevant verification on
+   its task branch.
 2. Present the complete review summary to the human reviewer.
 3. Wait for explicit merge approval. Approval applies to the reviewed changes and
    named target, not future changes or releases.

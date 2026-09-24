@@ -14,6 +14,7 @@ layout is an organizational starting point, not a completed implementation.
 - [Project context](docs/CONTEXT.md): purpose, scope, and open decisions.
 - [Agent instructions](AGENTS.md): common instructions for all agents.
 - [Development workflow](docs/WORKFLOW.md): worktrees, branches, and human review.
+- [Task plan template](docs/templates/TASK_PLAN.md): review before implementation.
 - [Review summary template](docs/templates/REVIEW_SUMMARY.md): required handoff.
 - [Requirements](docs/requirements/README.md) and [verification](docs/tests/README.md).
 
@@ -28,7 +29,7 @@ docs/
   tests/             System trials, procedures, and evidence
     trials/
     reports/
-  templates/         Reusable review summary
+  templates/         Task plan and review summary
 firmware/
   src/               Application implementation
   include/           Shared firmware headers
@@ -68,8 +69,9 @@ artifact conventions.
 ## Development status and releases
 
 Task branches start from and target `develop`. `main` is reserved for explicitly
-approved project milestones and releases. Local commits are allowed; merges
-require a review summary and explicit human approval. See the
+approved project milestones and releases. Execution tasks start with a plan for
+human approval. Once approved, local implementation commits are allowed; merges
+require a separate review summary and explicit human approval. See the
 [workflow](docs/WORKFLOW.md) for the complete policy.
 
 Documentation is written in English. The existing [license](LICENSE) is retained.

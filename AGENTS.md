@@ -17,6 +17,10 @@ Before editing:
 
 ## Working rules
 
+- For each new execution task, investigate and present the
+  [task plan](docs/templates/TASK_PLAN.md), then wait for explicit human approval
+  before implementation. Follow the planning policy in `docs/WORKFLOW.md`;
+  plan approval does not authorize a merge.
 - Use an isolated worktree and a task branch based on `develop`. Follow the
   naming and integration rules in the workflow.
 - Local task-branch commits are allowed. Every merge requires explicit human
