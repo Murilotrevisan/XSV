@@ -133,6 +133,12 @@ Use [the review summary template](templates/REVIEW_SUMMARY.md) verbatim for sect
 names and order. Complete every section. For inapplicable fields or diagrams,
 write `Not applicable — <reason>`; do not remove the section.
 
+Include `Implemented by: <agent name>` at the top of every review summary and PR
+description, for example `Implemented by: Codex`. List all agents that actually
+implemented changes when more than one contributed. This is a visible attribution
+field; it complements the required commit trailers and does not create GitHub PR
+co-authorship metadata.
+
 The summary must identify the source branch, target branch, reviewed commit or
 uncommitted state, and verification status. Provide file links, actual check
 results, limitations, and remaining work. Never present an unrun check as passed.

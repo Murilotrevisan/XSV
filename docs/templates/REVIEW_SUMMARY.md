@@ -1,5 +1,6 @@
 # Review summary
 
+- Implemented by: `<executing agent name(s), e.g. Codex, Claude, or Gemini>`
 - Source branch: `<agent>/<feature|fix>/<slug>`
 - Target branch: `develop` (or `main` for an approved milestone proposal)
 - Review scope: `<commit range or working-tree diff, including untracked files>`
