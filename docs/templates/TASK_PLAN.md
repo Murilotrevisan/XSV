@@ -1,6 +1,7 @@
 # Task plan
 
 - Task: `<title or issue reference>`
+- Planned by: `AGENT - MODEL (EFFORT)` (verify the planning agent's own active session)
 - Source branch: `<agent>/<feature|fix>/<slug>, existing or proposed>`
 - Target branch: `develop` (or `main` for a milestone proposal)
 - State: `Proposed; awaiting explicit approval before implementation.`

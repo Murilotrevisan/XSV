@@ -1,6 +1,7 @@
 # Review summary
 
-- Implemented by: `<executing agent name(s), e.g. Codex, Claude, or Gemini>`
+- Implemented by: `AGENT - MODEL (EFFORT)` (each actual contributor; verify your own session)
+- Attribution evidence: `<runtime status/session metadata or explicit confirmation; no private logs or paths>`
 - Source branch: `<agent>/<feature|fix>/<slug>`
 - Target branch: `develop` (or `main` for an approved milestone proposal)
 - Review scope: `<commit range or working-tree diff, including untracked files>`
@@ -65,7 +66,9 @@ changes. Do not invent a layer model. Otherwise:
 Separate automated checks, simulation, and physical verification when applicable.
 State failures, skipped checks, untested behavior, and remaining limitations.
 Account for the planned checks, identifying which ran, which did not, and why.
-Confirm that new agent-authored commits include the correct co-author trailers.
+Confirm that new agent-authored commits include verified `AGENT - MODEL (EFFORT)`
+co-author trailers using each executing agent's own email. Follow the identity
+procedure in [the workflow](../WORKFLOW.md); do not copy another agent's example.
 Documentation changes may use structural and link checks; do not describe those
 checks as validation of the vessel.
 

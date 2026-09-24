@@ -99,21 +99,80 @@ without per-commit approval. Use meaningful messages and coherent changes;
 there is no required commit count.
 Review the diff before committing and preserve unrelated work.
 
-Every new agent-authored commit must end with a `Co-authored-by` trailer naming
-the agent that performed the work. Keep the configured human Git author; do not
-change global Git identity to impersonate an agent. Separate trailers from the
-message body with a blank line. For Codex, use:
+Every new agent-authored commit must use the following attribution format, with
+the identity of the agent that actually implemented the changes:
 
 ```text
-Co-authored-by: Codex <codex@openai.com>
+Co-authored-by: AGENT - MODEL (EFFORT) <AGENT_EMAIL>
 ```
 
-Claude and Gemini use their actual agent name and configured attribution email.
-Do not attribute their work to Codex or invent a model version. If more than one
-agent contributed to a commit, include one trailer per actual contributor.
+`AGENT` is the executing tool/agent, such as Codex, Claude, or Gemini. `MODEL` is
+the actual model identifier or verified version used for the work. `EFFORT` is
+the effective reasoning/thinking setting, using the provider's own value; do not
+translate a budget or an automatic setting into a guessed `high` or `low`.
+
+### Verify your own session before committing
+
+This procedure applies equally to every agent, not only Codex:
+
+1. Inspect your active session's status, resolved request metadata, or current
+   session log to identify the model and effort used for the changes. Use your
+   own runtime's evidence, not another agent's example or earlier commit.
+2. Consult your provider's documentation when necessary to locate or interpret
+   those fields. Web research can explain how to inspect a runtime; it cannot
+   establish which model served your local session. Defaults, installed versions,
+   model catalogs, and the latest product announcement are not session evidence.
+3. Recheck after a model switch, resumed session, or delegated contribution. Credit
+   each distinct agent/model/effort combination that actually contributed, using
+   separate trailers when necessary. Do not label earlier work with the current
+   model merely because you are committing it now.
+4. If a required value cannot be established, report what you checked and request
+   confirmation or an explicitly approved `unverified` value before committing.
+   Use `not applicable` for effort only when its absence is confirmed, not because
+   you could not discover it. Never silently guess or copy example values.
+5. Identify the evidence type briefly in the review summary, such as "active
+   session metadata" or "runtime status". Do not publish raw session logs, private
+   paths, credentials, or unrelated conversation content.
+
+### Agent identities
+
+Select only the row matching the agent that did the work. The model and effort
+are deliberately placeholders in the examples; replace them from session evidence.
+Identity references below were checked on 2026-09-24.
+
+| Agent | GitHub account | Attribution email | Status |
+| --- | --- | --- | --- |
+| Codex | [@codex](https://github.com/codex) | `codex@openai.com` | GitHub association verified on an XSV commit. |
+| Claude | [@claude](https://github.com/claude) | `noreply@anthropic.com` | Claude attribution convention; use only for Claude work. |
+| Gemini | [@gemini-cli](https://github.com/gemini-cli) | Candidate: `218195315+gemini-cli@users.noreply.github.com` | Community-documented association; official Google ownership not verified. Validate for the executing integration before use. |
+
+GitHub associates a co-author using the email in the
+[commit trailer](https://docs.github.com/en/pull-requests/how-tos/commit-changes/creating-a-commit-with-multiple-authors).
+For Gemini, the candidate above comes from a
+[pinned upstream discussion](https://github.com/google-gemini/gemini-cli/issues/12419);
+it is not a claim that the account is Google-owned. Before the first Gemini commit,
+verify the appropriate identity from the integration's official guidance or ask
+the owner to approve a documented convention. Do not substitute an unrelated bot
+or invent an address based on a product name.
+
+```text
+Co-authored-by: Codex - MODEL (EFFORT) <codex@openai.com>
+Co-authored-by: Claude - MODEL (EFFORT) <noreply@anthropic.com>
+```
+
+These are alternatives, not trailers to copy together. Claude must use `Claude`,
+its own active model/effort, and the Claude email; Gemini must use `Gemini`, its
+own active model/effort, and its verified identity. Neither may copy Codex's name,
+model, effort, or email. Adjust any automatically generated trailer to this format
+without leaving a duplicate generic trailer for the same contribution.
+
+Keep the configured human Git author and separate trailers from the message body
+with a blank line. Do not change global Git identity to impersonate an agent.
 Human-only commits do not receive an agent trailer. Check attribution before
-pushing; preserve it when preparing any squash message. Adding attribution to
-existing commits requires the history-rewrite approval described below.
+pushing and preserve it when preparing a squash message. Existing commits are not
+retroactively relabeled; attribution changes to history require the approval below.
+
+### Synchronization and publication
 
 Every merge requires explicit human approval, including merges used to refresh
 a task branch from `develop`. If the base advances, inspect the impact and propose
@@ -133,10 +192,12 @@ Use [the review summary template](templates/REVIEW_SUMMARY.md) verbatim for sect
 names and order. Complete every section. For inapplicable fields or diagrams,
 write `Not applicable — <reason>`; do not remove the section.
 
-Include `Implemented by: <agent name>` at the top of every review summary and PR
-description, for example `Implemented by: Codex`. List all agents that actually
-implemented changes when more than one contributed. This is a visible attribution
-field; it complements the required commit trailers and does not create GitHub PR
+Include `Implemented by: AGENT - MODEL (EFFORT)` at the top of every review summary
+and PR description. Use the same verified identities as the commit trailers and
+list all contributing combinations when more than one was used. Include a brief
+attribution-evidence note. Plans use `Planned by` for the planning agent, verified
+the same way; planning identity does not predetermine implementation identity.
+These visible fields complement the trailers and do not create GitHub PR
 co-authorship metadata.
 
 The summary must identify the source branch, target branch, reviewed commit or

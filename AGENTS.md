@@ -29,7 +29,10 @@ Before editing:
   approval is required before publication. The human reviews and merges on GitHub;
   agents do not merge PRs or enable auto-merge. Releases require separate scope.
 - Every agent-authored commit must include a `Co-authored-by` trailer identifying
-  the executing agent. Follow the attribution convention in `docs/WORKFLOW.md`.
+  the executing agent as `AGENT - MODEL (EFFORT)`. Before committing, every agent
+  must investigate its own active-session model and effort, and use its own
+  verified attribution email. Claude and Gemini must not copy Codex's identity.
+  Follow the verification procedure in `docs/WORKFLOW.md`.
 - When asked to address PR feedback, read both general and inline comments, apply
   in-scope corrections, verify them, and update the same PR and its summary.
   Material departures from the approved plan still require approval first.
