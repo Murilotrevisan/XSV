@@ -18,6 +18,13 @@ No geometry, materials, CAD system, or fabrication process has been selected.
 The presence of `stl/` and `print/` supports future additive manufacturing work
 without requiring every part to use it.
 
+Design work must address the
+[mission baseline](../docs/requirements/missions/INITIAL_MISSIONS.md), including
+impact, self-righting, and submerged operation. Plastic bottles with printed
+supports are a [candidate concept](../hardware/CANDIDATES.md), not an adopted
+hull design. Use the shared [budget rules](../docs/requirements/BUDGET.md) for
+filament and empty-bottle valuation.
+
 ## Sources, exports, and evidence
 
 Edit model sources rather than treating an exported mesh as the design source.

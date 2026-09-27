@@ -10,6 +10,9 @@ Electronics design sources and supporting material. Read
   only when redistribution is permitted and useful to the project.
 
 No components, board toolchain, or electrical architecture have been selected.
+See [candidate assessment](CANDIDATES.md) for the ESP32-C3 option, and follow the
+[mission baseline](../docs/requirements/missions/INITIAL_MISSIONS.md) and
+[budget](../docs/requirements/BUDGET.md) when evaluating parts and protection.
 Keep editable sources authoritative and identify the revision behind exports.
 When changing electrical behavior, provide the relevant electrical diagram.
 When changing geometry or mounting, provide dimensioned drawings and update the
