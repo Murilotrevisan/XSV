@@ -28,11 +28,29 @@ made.
   delivered as releases. The human performs integration through GitHub PRs.
 - Empty reserved directories are tracked with `.gitkeep`.
 
+## Mission baseline
+
+The initial scope is a remotely operated toy surface vessel for distance,
+maneuverability, ramp jumping, acceleration, and contact combat/durability trials.
+Self-righting after capsize and operation during submersion are required outcomes.
+The authoritative definitions, operating conditions, budget, and unresolved
+acceptance parameters live in [requirements](requirements/README.md).
+
+Here, endurance means distance traveled in a fixed time; it does not prescribe
+autonomous navigation. Recovery requirements do not select an active or passive
+mechanism. Physical verification remains outstanding for every mission.
+
 ## Open engineering decisions
 
-Mission content and acceptance thresholds have not been defined. Vessel geometry,
-materials, propulsion, electronics, sensors, power, communications, autonomy,
-software architecture, and toolchains remain open.
+Vessel geometry, materials, propulsion, electronics, sensors, power,
+communications, software architecture, and toolchains remain open. An ESP32-C3
+board with phone control and a construction using plastic bottles with printed
+supports are candidates, not selected designs. See the
+[candidate assessment](../hardware/CANDIDATES.md).
+
+Performance targets, course geometry, recovery time, and submersion depth and
+duration still need definition. Electronics remaining functional underwater must
+not be confused with a demonstrated underwater radio link.
 
 The repository skeleton does not approve any of these choices. For example,
 `firmware/drivers/` reserves an organizational location; it does not prescribe

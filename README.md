@@ -5,9 +5,11 @@ and technology demonstrations. Firmware, electronics, mechanical design, and the
 control station are developed together in this monorepo. Shared missions and
 trials will define what the vessel must accomplish and how it is evaluated.
 
-**Current status:** repository foundation. Mission criteria, components, software
-architecture, and engineering toolchains have not been selected. The directory
-layout is an organizational starting point, not a completed implementation.
+**Current status:** initial [mission requirements](docs/requirements/README.md)
+and verification outlines are documented, including recovery and submerged
+operation. Performance thresholds and environmental limits remain partly open.
+Components, software architecture, and engineering toolchains are not selected;
+the ESP32-C3 is a candidate. No vessel capability has been physically verified.
 
 ## Start here
 

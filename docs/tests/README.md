@@ -17,4 +17,6 @@ physical behavior. Keep compact evidence and relevant raw measurements; document
 the location and provenance of larger datasets without committing transient
 output by default.
 
-No vessel trial has been defined or executed yet.
+The [initial trial outlines](trials/INITIAL_TRIALS.md) cover the mission baseline
+and budget inspection. They require the unresolved parameters to be set before
+execution. No vessel trial has been executed yet.
