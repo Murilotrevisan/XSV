@@ -28,6 +28,10 @@ Before editing:
   and open or update its PR with the complete review summary. No separate summary
   approval is required before publication. The human reviews and merges on GitHub;
   agents do not merge PRs or enable auto-merge. Releases require separate scope.
+- Use the GitHub CLI (`gh`) for PR publication and feedback, within the permitted
+  and prohibited commands in [the workflow](docs/WORKFLOW.md#github-cli). If `gh`
+  is missing or not authenticated, ask the human instead of using stored
+  credentials.
 - Every agent-authored commit must include a `Co-authored-by` trailer identifying
   the executing agent as `AGENT - MODEL (EFFORT)`. Before committing, every agent
   must investigate its own active-session model and effort, and use its own
