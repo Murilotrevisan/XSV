@@ -186,6 +186,74 @@ Do not ask for a separate completion-summary approval. This authorization does
 not cover direct pushes to `develop` or `main`, unrelated changes, force pushes,
 tags, or release publication.
 
+## GitHub CLI
+
+Agents use the [GitHub CLI](https://cli.github.com/) (`gh`) for the GitHub
+operations in this workflow. Git still handles commits and pushes of the task
+branch.
+
+### Setup
+
+The human installs `gh` and authenticates it; agents never log in on the
+human's behalf. The human chooses the login method. A fine-grained personal
+access token limited to this repository, with read and write access to contents
+and pull requests, restricts what agents can reach. Before publishing, confirm
+access with `gh auth status`. Never print tokens, copy them into files, or
+commit them.
+
+If `gh` is missing or not authenticated, report the blocker and ask the human.
+Do not substitute direct API calls that use stored Git credentials or other
+tokens.
+
+### Permitted commands
+
+Run commands from the task worktree so that `gh` resolves the repository from
+`origin`; `gh api` fills in the `{owner}` and `{repo}` placeholders. Keep summary
+and reply files outside the repository so they are not committed.
+
+| Workflow step | Command |
+| --- | --- |
+| Check for an open PR for the task branch | `gh pr list --head <branch> --state open` |
+| Open the PR with the review summary | `gh pr create --base develop --head <branch> --title "<title>" --body-file <summary.md>` |
+| Update the description after changes | `gh pr edit <number> --body-file <summary.md>` |
+| Read general comments | `gh pr view <number> --comments` |
+| Read submitted reviews | `gh api 'repos/{owner}/{repo}/pulls/<number>/reviews'` |
+| Read inline threads and their resolution state | The GraphQL query below |
+| Answer review feedback in the PR conversation | `gh pr comment <number> --body-file <reply.md>` |
+| Read check status, only when asked | `gh pr checks <number>` |
+
+Use `--base main` only for an approved milestone PR.
+
+```sh
+gh api graphql -F owner='{owner}' -F name='{repo}' -F number=<number> -f query='
+query($owner: String!, $name: String!, $number: Int!) {
+  repository(owner: $owner, name: $name) {
+    pullRequest(number: $number) {
+      reviewThreads(first: 100) {
+        nodes {
+          isResolved
+          isOutdated
+          path
+          line
+          comments(first: 50) { nodes { author { login } body } }
+        }
+      }
+    }
+  }
+}'
+```
+
+### Prohibited commands
+
+- `gh pr merge` in any form, including `--auto`.
+- `gh pr review`: approving or requesting changes belongs to the human.
+- Closing or reopening PRs and deleting branches, unless the human asks.
+- `gh release`, `gh repo edit`, `gh repo delete`, and changes to secrets,
+  variables, rulesets, or other repository settings.
+- Any REST call through `gh api` other than a read, and any GraphQL mutation.
+  `gh api` switches to POST when fields are passed with `-f` or `-F`, so REST
+  reads take no fields or use `--method GET`.
+
 ## Review handoff
 
 Use [the review summary template](templates/REVIEW_SUMMARY.md) verbatim for section
@@ -232,7 +300,8 @@ repository locations.
 ## PR feedback
 
 When asked to address PR feedback, read general conversation comments, submitted
-reviews, and inline review threads, including their current resolution state.
+reviews, and inline review threads, including their current resolution state,
+with the [GitHub CLI commands](#github-cli).
 Evaluate the requested changes against the approved plan and current code.
 Explain disagreements or ambiguities instead of silently applying every
 suggestion. Comments from other contributors do not override the project owner's
@@ -255,8 +324,9 @@ monitoring without one. The human retains final review and merge responsibility.
    its task branch.
 2. Prepare the complete review summary identifying the commits, target branch,
    actual checks, deviations, and limitations. Verify agent co-author trailers.
-3. Push the task branch to `origin` and open a PR targeting `develop`. If an open
-   PR already exists for the task, update it instead of opening a duplicate.
+3. Push the task branch to `origin` and open a PR targeting `develop` with
+   [`gh`](#github-cli). If an open PR already exists for the task, update it
+   instead of opening a duplicate.
    Use the summary as the description and return the PR link. Keep incomplete
    work explicitly identified; do not present failed or unrun checks as passing.
 4. The human chooses whether to inspect the full diff or rely on the summary, and
