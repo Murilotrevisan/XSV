@@ -32,20 +32,23 @@ made.
 
 The initial scope is a remotely operated toy surface vessel for distance,
 maneuverability, ramp jumping, acceleration, and contact combat/durability trials.
-Self-righting after capsize and operation during submersion are required outcomes.
-The authoritative definitions, operating conditions, budget, and unresolved
-acceptance parameters live in [requirements](requirements/README.md).
+Continued operation after capsize, in either orientation or after righting,
+and operation during submersion are required outcomes. In combat, a capsize
+counts as a loss. The authoritative definitions, operating conditions, budget,
+and unresolved acceptance parameters live in [requirements](requirements/README.md).
 
 Here, endurance means distance traveled in a fixed time; it does not prescribe
-autonomous navigation. Recovery requirements do not select an active or passive
-mechanism. Physical verification remains outstanding for every mission.
+autonomous navigation. Recovery requirements do not prescribe a mechanism.
+Physical verification remains outstanding for every mission.
 
 ## Open engineering decisions
 
-Vessel geometry, materials, propulsion, electronics, sensors, power,
-communications, software architecture, and toolchains remain open. An ESP32-C3
-board with phone control and a construction using plastic bottles with printed
-supports are candidates, not selected designs. See the
+The hull concept is adopted: a multihull symmetric about its horizontal
+mid-plane that operates in either orientation, built from plastic bottles. See
+the [hull concept](architecture/HULL_CONCEPT.md). Detailed geometry, materials,
+propulsion, electronics, sensors, power, communications, software architecture,
+and toolchains remain open. An ESP32-C3 board with phone control is a
+candidate, not a selected design. See the
 [candidate assessment](../hardware/CANDIDATES.md).
 
 Performance targets, course geometry, recovery time, and submersion depth and
@@ -60,7 +63,7 @@ the software dependency structure. `CMakeLists.txt` is only a placeholder.
 
 - [Requirements and missions](requirements/README.md) own expected behavior and
   measurable acceptance criteria.
-- `architecture/` will explain adopted system structure and cross-discipline
+- `architecture/` explains adopted system structure and cross-discipline
   interfaces. Record meaningful decisions and their rationale there when made.
 - [Protocol documentation](protocols/README.md) explains communication behavior;
   machine-readable contracts belong to `protocol/definitions/`.
