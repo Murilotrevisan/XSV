@@ -14,16 +14,19 @@ Vessel geometry, mechanical parts, fabrication, and supporting analyses. Read
 | `docs/renders/` | Viewable illustrations linked to their source models. |
 | `tools/` | Export, geometry-checking, and fabrication helpers. |
 
-No geometry, materials, CAD system, or fabrication process has been selected.
-The presence of `stl/` and `print/` supports future additive manufacturing work
-without requiring every part to use it.
+The hull concept is adopted: a multihull of plastic bottles, symmetric about its
+horizontal mid-plane, that operates in either orientation. See the
+[hull concept](../docs/architecture/HULL_CONCEPT.md) and the
+[concept study](analysis/hull-concepts/README.md). Detailed geometry, materials,
+CAD system, and fabrication process have not been selected. The presence of
+`stl/` and `print/` supports future additive manufacturing work without
+requiring every part to use it.
 
 Design work must address the
 [mission baseline](../docs/requirements/missions/INITIAL_MISSIONS.md), including
-impact, self-righting, and submerged operation. Plastic bottles with printed
-supports are a [candidate concept](../hardware/CANDIDATES.md), not an adopted
-hull design. Use the shared [budget rules](../docs/requirements/BUDGET.md) for
-filament and empty-bottle valuation.
+impact, capsize recovery, and submerged operation. Use the shared
+[budget rules](../docs/requirements/BUDGET.md) for filament and empty-bottle
+valuation.
 
 ## Sources, exports, and evidence
 
