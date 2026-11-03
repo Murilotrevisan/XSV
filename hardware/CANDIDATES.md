@@ -41,10 +41,11 @@ envelope and recovery behavior must be resolved before design validation.
 ## Plastic bottles with printed supports
 
 Reused plastic bottles with printed supports are a candidate way to reduce
-printed material while providing flotation. No bottle volume, count, geometry,
-filament material, or fastening method is selected. Mechanical evaluation must
-consider attachment integrity, impact, leakage, stability, and self-righting:
-flotation alone does not demonstrate recovery from an inverted position.
+printed material while providing flotation. The adopted
+[hull concept](../docs/architecture/HULL_CONCEPT.md) uses this construction with
+nominal 500 mL outer hulls. Measured bottle dimensions, filament material, and
+fastening method are not selected. Mechanical evaluation must consider
+attachment integrity, impact, leakage, stability, and operation after capsize.
 
 Apply the shared bottle valuation and filament cost rules in the budget document.
 Document geometry and actual mass when a design exists; do not infer them from
